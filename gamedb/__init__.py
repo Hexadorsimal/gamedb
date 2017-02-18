@@ -16,9 +16,7 @@ db = SQLAlchemy(app)
 
 import gamedb.views
 import gamedb.hello
-import gamedb.model.company
-import gamedb.model.hardware
-import gamedb.model.location
-import gamedb.model.role
-import gamedb.model.software
-import gamedb.model.user
+import gamedb.model
+
+
+db.create_all()
