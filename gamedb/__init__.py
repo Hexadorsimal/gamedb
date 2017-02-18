@@ -16,3 +16,5 @@ db = SQLAlchemy(app)
 
 import gamedb.views
 import gamedb.hello
+import gamedb.model.user
+import gamedb.model.role
