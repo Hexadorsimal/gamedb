@@ -3,7 +3,7 @@ from flask import render_template
 from gamedb import app
 
 
-@app.route("/user/<name>")
+@app.route("/users/<name>")
 def user(name):
     return render_template("user.html", name=name)
 
