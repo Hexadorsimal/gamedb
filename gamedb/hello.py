@@ -3,7 +3,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
-from gamedb import app
+from gamedb import app, db
+from gamedb.model import User
 
 
 class NameForm(FlaskForm):
@@ -15,9 +16,17 @@ class NameForm(FlaskForm):
 def index():
     form = NameForm()
     if form.validate_on_submit():
-        old_name = session.get("name")
-        if old_name is not None and old_name != form.name.data:
-            flash("Looks like you have changed your name!")
+        user = User.query.filter_by(name=form.name.data).first()
+        if user:
+            session['known'] = True
+        else:
+            session['known'] = False
+            user = User(name=form.name.data)
+            db.session.add(user)
+            db.session.commit()
+
         session["name"] = form.name.data
+        form.name.data = ""
         return redirect(url_for("index"))
-    return render_template("index.html", form=form, name=session.get("name"))
+    else:
+        return render_template("index.html", form=form, name=session.get("name"), known=session.get("known"))
