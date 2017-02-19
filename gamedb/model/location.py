@@ -8,6 +8,3 @@ class Location(db.Model):
     state = db.Column(db.String)
     zip = db.Column(db.String)
     country = db.Column(db.String)
-
-    def __repr__(self):
-        return "<Location {street} {city}, {state} {zip} {country}>".format(street=self.street, city=self.city, state=self.state, zip=self.zip, country=self.country)
