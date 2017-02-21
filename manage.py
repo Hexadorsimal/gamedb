@@ -1,8 +1,13 @@
+#!/usr/bin/env python
+import os
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager, Server, Shell
 
-from gamedb import app, db
+from gamedb import create_app, db
 from gamedb.model import Role, User
+
+
+app = create_app(os.getenv("FLASK_CONFIG") or "default")
 
 
 def _make_context():

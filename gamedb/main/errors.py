@@ -1,18 +1,12 @@
 from flask import render_template
-
-from gamedb import app
-
-
-@app.route("/users/<name>")
-def user(name):
-    return render_template("user.html", name=name)
+from . import main
 
 
-@app.errorhandler(404)
+@main.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html"), 404
 
 
-@app.errorhandler(500)
+@main.errorhandler(500)
 def internal_server_error(e):
     return render_template("500.html"), 500
